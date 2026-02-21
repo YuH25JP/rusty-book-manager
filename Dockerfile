@@ -1,4 +1,4 @@
-FROM rust:1.78-slim-bookworm AS builder
+FROM rust:1.93.1-slim-bookworm AS builder
 WORKDIR /app
 
 ARG DATABASE_URL
@@ -13,6 +13,6 @@ RUN adduser book && chown -R book /app
 USER book
 COPY --from=builder ./app/target/release/app ./target/release/app
 
-ENV PORT 8080
+ENV PORT=8080
 EXPOSE $PORT
 ENTRYPOINT ["./target/release/app"]
